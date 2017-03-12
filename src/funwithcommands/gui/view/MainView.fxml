@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="498.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="funwithcommands.gui.controller.MainViewController">
+   <children>
+      <ListView fx:id="listWords" layoutX="50.0" layoutY="142.0" prefHeight="314.0" prefWidth="200.0" />
+      <TextField fx:id="txtInput" layoutX="50.0" layoutY="69.0" onAction="#onTxtInputAxtion" prefHeight="31.0" prefWidth="200.0" promptText="enter a word..." />
+      <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="300.0">
+         <menus>
+            <Menu mnemonicParsing="false" text="Actions">
+              <items>
+                <MenuItem fx:id="menuUndo" mnemonicParsing="false" onAction="#handleUndo" text="Undo" />
+                  <MenuItem fx:id="menuRedo" mnemonicParsing="false" onAction="#handleRedo" text="Redo" />
+              </items>
+            </Menu>
+         </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>
