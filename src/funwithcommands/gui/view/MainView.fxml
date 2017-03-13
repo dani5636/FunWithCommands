@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import java.net.URL?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
@@ -8,10 +10,13 @@
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane id="AnchorPane" prefHeight="498.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1" fx:controller="funwithcommands.gui.controller.MainViewController">
+    <stylesheets>
+        <URL value="@../css/MyStyle.css" />
+    </stylesheets>
    <children>
-      <ListView fx:id="listWords" layoutX="50.0" layoutY="142.0" prefHeight="314.0" prefWidth="200.0" />
-      <TextField fx:id="txtInput" layoutX="50.0" layoutY="69.0" onAction="#onTxtInputAxtion" prefHeight="31.0" prefWidth="200.0" promptText="enter a word..." />
-      <MenuBar layoutY="-2.0" prefHeight="32.0" prefWidth="300.0">
+      <ListView fx:id="listWords" layoutX="50.0" layoutY="142.0" prefHeight="314.0" prefWidth="200.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="140.0" />
+      <TextField fx:id="txtInput" layoutX="50.0" layoutY="69.0" maxWidth="1.7976931348623157E308" onAction="#onTxtInputAxtion" prefHeight="30.0" promptText="enter a word..." AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="70.0" />
+      <MenuBar layoutY="-2.0" nodeOrientation="LEFT_TO_RIGHT" opacity="0.7" prefHeight="32.0" prefWidth="300.0">
          <menus>
             <Menu mnemonicParsing="false" text="Actions">
               <items>
@@ -20,6 +25,14 @@
               </items>
             </Menu>
          </menus>
+         <styleClass>
+            <String fx:value="transparentAndWhite" />
+            <String fx:value="whiteText" />
+         </styleClass>
       </MenuBar>
    </children>
+   <styleClass>
+      <String fx:value="bg" />
+      <String fx:value="whiteText" />
+   </styleClass>
 </AnchorPane>

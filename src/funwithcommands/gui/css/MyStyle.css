@@ -1,0 +1,26 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Mar 13, 2017, 8:49:47 AM
+    Author     : pgn
+*/
+
+.bg 
+{
+    -fx-background-color: linear-gradient(white 0%, gray 25%, black 50%, gray 75%, whitesmoke 100%);
+}
+
+.transparentAndWhite 
+{
+    -fx-background-color: rgba(255, 255, 255, 0);
+}
+
+.whiteText 
+{
+    -fx-font: 16px Tahoma;
+    -fx-stroke: white;
+    -fx-stroke-width: 1;
+}
