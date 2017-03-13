@@ -56,6 +56,12 @@ public class MainViewController implements Initializable
         updateCommandMenuItemsState();
     }
 
+    @FXML
+    private void onButtonClearAll(ActionEvent event)
+    {
+        //TODO implement Clear all command here!!!
+    }
+
     /**
      * When prompted will add the currently entered text of the textfield to the
      * list.
@@ -83,9 +89,12 @@ public class MainViewController implements Initializable
                     model.removeWord(word);
                 }
             };
+            
+            
+            
             command.execute(); //We have to execute the ICommand for stuff to happen!
             executedCommands.add(command); //Also we must add it to the list of executed commands if it should be undoable.
-            undoneCommands.clear(); //We changed the current "thread of commands" an therefor we should not be able to redo something that we no longer did wan't to do, or didn't wan't to do... Arrgh, you get it, right?
+            undoneCommands.clear(); //We changed the current "thread of commands" an therefore we should not be able to redo something that we no longer did wan't to do, or didn't wan't to do... Arrgh, you get it, right?
             updateCommandMenuItemsState(); //Som UX stuff, yeah sweet..
         }
         txtInput.clear();           //Quality of life right here
