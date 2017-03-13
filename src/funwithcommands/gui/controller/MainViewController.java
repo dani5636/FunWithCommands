@@ -5,7 +5,7 @@
  */
 package funwithcommands.gui.controller;
 
-import funwithcommands.gui.command.ICommand;
+import funwithcommands.gui.command.*;
 import funwithcommands.gui.model.WordModel;
 import java.net.URL;
 import java.util.LinkedList;
@@ -22,8 +22,7 @@ import javafx.scene.control.TextField;
  *
  * @author Stegger
  */
-public class MainViewController implements Initializable
-{
+public class MainViewController implements Initializable {
 
     @FXML
     private ListView<String> listWords;
@@ -46,8 +45,7 @@ public class MainViewController implements Initializable
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb)
-    {
+    public void initialize(URL url, ResourceBundle rb) {
         model = new WordModel();
         executedCommands = new LinkedList<>();
         undoneCommands = new LinkedList<>();
@@ -57,9 +55,13 @@ public class MainViewController implements Initializable
     }
 
     @FXML
-    private void onButtonClearAll(ActionEvent event)
-    {
-        //TODO implement Clear all command here!!!
+    private void onButtonClearAll(ActionEvent event) {
+        ClearCommand command = new ClearCommand(model);
+        command.execute(); //We have to execute the ICommand for stuff to happen!
+        executedCommands.add(command); //Also we must add it to the list of executed commands if it should be undoable.
+        undoneCommands.clear(); //We changed the current "thread of commands" an therefore we should not be able to redo something that we no longer did wan't to do, or didn't wan't to do... Arrgh, you get it, right?
+        updateCommandMenuItemsState(); //Som UX stuff, yeah sweet..
+
     }
 
     /**
@@ -69,29 +71,11 @@ public class MainViewController implements Initializable
      * @param actionEvent
      */
     @FXML
-    private void onTxtInputAxtion(ActionEvent actionEvent)
-    {
+    private void onTxtInputAxtion(ActionEvent actionEvent) {
         String word = txtInput.getText().trim();
-        if (!word.isEmpty())
-        {
-            ICommand command = new ICommand() //We create a new ICommand object:
-            {
+        if (!word.isEmpty()) {
+            TextAction command = new TextAction(model, word);
 
-                @Override
-                public void execute() //When executed will add word to model:
-                {
-                    model.addWord(word);
-                }
-
-                @Override
-                public void undo() //When undone will remove same word:
-                {
-                    model.removeWord(word);
-                }
-            };
-            
-            
-            
             command.execute(); //We have to execute the ICommand for stuff to happen!
             executedCommands.add(command); //Also we must add it to the list of executed commands if it should be undoable.
             undoneCommands.clear(); //We changed the current "thread of commands" an therefore we should not be able to redo something that we no longer did wan't to do, or didn't wan't to do... Arrgh, you get it, right?
@@ -107,8 +91,7 @@ public class MainViewController implements Initializable
      * @param event
      */
     @FXML
-    private void handleUndo(ActionEvent event)
-    {
+    private void handleUndo(ActionEvent event) {
         if (!executedCommands.isEmpty()) //If nothing to undo, the don't undo anything. Or well, don't DO any UNDOING then...
         {
             ICommand lastCommand = executedCommands.pollLast(); //Get the latest executed command, pull it out of the list..
@@ -124,8 +107,7 @@ public class MainViewController implements Initializable
      * @param event
      */
     @FXML
-    private void handleRedo(ActionEvent event)
-    {
+    private void handleRedo(ActionEvent event) {
         if (!undoneCommands.isEmpty()) //The same thing happen here as above, just a different list...
         {
             ICommand lastCommand = undoneCommands.pollLast(); //So I'm not going to type the same thing twice.
@@ -139,23 +121,16 @@ public class MainViewController implements Initializable
      * Correctly disables the command menu items if there is nothing to
      * redo/undo.
      */
-    private void updateCommandMenuItemsState()
-    {
-        if (executedCommands.isEmpty())
-        {
+    private void updateCommandMenuItemsState() {
+        if (executedCommands.isEmpty()) {
             menuUndo.setDisable(true);
-        }
-        else
-        {
+        } else {
             menuUndo.setDisable(false);
         }
 
-        if (undoneCommands.isEmpty())
-        {
+        if (undoneCommands.isEmpty()) {
             menuRedo.setDisable(true);
-        }
-        else
-        {
+        } else {
             menuRedo.setDisable(false);
         }
     }

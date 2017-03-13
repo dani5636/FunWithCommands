@@ -5,6 +5,7 @@
  */
 package funwithcommands.gui.model;
 
+import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -12,13 +13,12 @@ import javafx.collections.ObservableList;
  *
  * @author Stegger
  */
-public class WordModel
-{
+public class WordModel {
 
     private final ObservableList<String> words;
+    private final ArrayList<String> deletedList = new ArrayList();
 
-    public WordModel()
-    {
+    public WordModel() {
         words = FXCollections.observableArrayList();
     }
 
@@ -27,8 +27,7 @@ public class WordModel
      *
      * @return
      */
-    public ObservableList<String> getWordList()
-    {
+    public ObservableList<String> getWordList() {
         return words;
     }
 
@@ -37,8 +36,7 @@ public class WordModel
      *
      * @param word
      */
-    public void addWord(String word)
-    {
+    public void addWord(String word) {
         words.add(word);
     }
 
@@ -47,9 +45,19 @@ public class WordModel
      *
      * @param word
      */
-    public void removeWord(String word)
-    {
+    public void removeWord(String word) {
         words.remove(word);
+    }
+
+    public void clearWords() {
+        deletedList.clear();
+        deletedList.addAll(words);
+        words.clear();
+    }
+
+    public void undoClear() {
+        words.addAll(deletedList);
+
     }
 
 }
